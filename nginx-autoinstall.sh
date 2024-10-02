@@ -9,10 +9,10 @@ fi
 # Define versions
 NGINX_MAINLINE_VER=${NGINX_MAINLINE_VER:-1.21.6}
 NGINX_STABLE_VER=${NGINX_STABLE_VER:-1.22.0}
-LIBRESSL_VER=${LIBRESSL_VER:-3.3.1}
+LIBRESSL_VER=${LIBRESSL_VER:-3.9.2}
 OPENSSL_VER=${OPENSSL_VER:-3.3.2}
 NPS_VER=${NPS_VER:-1.13.35.2}
-HEADERMOD_VER=${HEADERMOD_VER:-0.33}
+HEADERMOD_VER=${HEADERMOD_VER:-0.37}
 LIBMAXMINDDB_VER=${LIBMAXMINDDB_VER:-1.4.3}
 GEOIP2_VER=${GEOIP2_VER:-3.3}
 LUA_JIT_VER=${LUA_JIT_VER:-2.1-20220310}
@@ -486,7 +486,7 @@ case $OPTION in
 	if [[ ! -e /etc/nginx/nginx.conf ]]; then
 		mkdir -p /etc/nginx
 		cd /etc/nginx || exit 1
-		wget https://raw.githubusercontent.com/Angristan/nginx-autoinstall/master/conf/nginx.conf
+		wget https://raw.githubusercontent.com/shlrkb/nginx-autoinstall/master/conf/nginx.conf
 	fi
 	cd /usr/local/src/nginx/nginx-${NGINX_VER} || exit 1
 
@@ -680,7 +680,7 @@ case $OPTION in
 		patch -p01 </usr/local/src/nginx/modules/quiche/nginx/nginx-1.16.patch
 
 		# Apply patch for nginx > 1.19.7 (source: https://github.com/cloudflare/quiche/issues/936#issuecomment-857618081)
-		wget https://raw.githubusercontent.com/angristan/nginx-autoinstall/master/patches/nginx-http3-1.19.7.patch -O nginx-http3.patch
+		wget https://raw.githubusercontent.com/shlrkb/nginx-autoinstall/master/patches/nginx-http3-1.19.7.patch -O nginx-http3.patch
 		patch -p01 <nginx-http3.patch
 
 		NGINX_OPTIONS=$(
@@ -727,14 +727,14 @@ case $OPTION in
 	# Using the official systemd script and logrotate conf from nginx.org
 	if [[ ! -e /lib/systemd/system/nginx.service ]]; then
 		cd /lib/systemd/system/ || exit 1
-		wget https://raw.githubusercontent.com/Angristan/nginx-autoinstall/master/conf/nginx.service
+		wget https://raw.githubusercontent.com/shlrkb/nginx-autoinstall/master/conf/nginx.service
 		# Enable nginx start at boot
 		systemctl enable nginx
 	fi
 
 	if [[ ! -e /etc/logrotate.d/nginx ]]; then
 		cd /etc/logrotate.d/ || exit 1
-		wget https://raw.githubusercontent.com/Angristan/nginx-autoinstall/master/conf/nginx-logrotate -O nginx
+		wget https://raw.githubusercontent.com/shlrkb/nginx-autoinstall/master/conf/nginx-logrotate -O nginx
 	fi
 
 	# Nginx's cache directory is not created by default
