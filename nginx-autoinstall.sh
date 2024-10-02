@@ -13,15 +13,15 @@ LIBRESSL_VER=${LIBRESSL_VER:-3.9.2}
 OPENSSL_VER=${OPENSSL_VER:-3.3.2}
 NPS_VER=${NPS_VER:-1.13.35.2}
 HEADERMOD_VER=${HEADERMOD_VER:-0.37}
-LIBMAXMINDDB_VER=${LIBMAXMINDDB_VER:-1.4.3}
-GEOIP2_VER=${GEOIP2_VER:-3.3}
-LUA_JIT_VER=${LUA_JIT_VER:-2.1-20220310}
-LUA_NGINX_VER=${LUA_NGINX_VER:-0.10.21rc2}
-LUA_RESTYCORE_VER=${LUA_RESTYCORE_VER:-0.1.23rc1}
-LUA_RESTYLRUCACHE_VER=${LUA_RESTYLRUCACHE_VER:-0.11}
-NGINX_DEV_KIT=${NGINX_DEV_KIT:-0.3.1}
+LIBMAXMINDDB_VER=${LIBMAXMINDDB_VER:-1.11.0}
+GEOIP2_VER=${GEOIP2_VER:-3.4}
+LUA_JIT_VER=${LUA_JIT_VER:-2.1-20240815}
+LUA_NGINX_VER=${LUA_NGINX_VER:-0.10.27}
+LUA_RESTYCORE_VER=${LUA_RESTYCORE_VER:-0.1.29}
+LUA_RESTYLRUCACHE_VER=${LUA_RESTYLRUCACHE_VER:-0.14}
+NGINX_DEV_KIT=${NGINX_DEV_KIT:-0.3.3}
 HTTPREDIS_VER=${HTTPREDIS_VER:-0.3.9}
-NGXECHO_VER=${NGXECHO_VER:-0.62}
+NGXECHO_VER=${NGXECHO_VER:-0.63}
 # Define options
 NGINX_OPTIONS=${NGINX_OPTIONS:-"
 	--prefix=/etc/nginx \
@@ -288,7 +288,7 @@ case $OPTION in
 	# More Headers
 	if [[ $HEADERMOD == 'y' ]]; then
 		cd /usr/local/src/nginx/modules || exit 1
-		wget https://github.com/openresty/headers-more-nginx-module/archive/v${HEADERMOD_VER}.tar.gz
+  		wget https://github.com/openresty/headers-more-nginx-module/archive/refs/tags/v${HEADERMOD_VER}.zip
 		tar xaf v${HEADERMOD_VER}.tar.gz
 	fi
 
@@ -377,7 +377,7 @@ case $OPTION in
 	if [[ $LUA == 'y' ]]; then
 		# LuaJIT download
 		cd /usr/local/src/nginx/modules || exit 1
-		wget https://github.com/openresty/luajit2/archive/v${LUA_JIT_VER}.tar.gz
+  		wget https://github.com/openresty/luajit2/archive/refs/tags/v${LUA_JIT_VER}.tar.gz
 		tar xaf v${LUA_JIT_VER}.tar.gz
 		cd luajit2-${LUA_JIT_VER} || exit 1
 		make -j "$(nproc)"
@@ -385,24 +385,24 @@ case $OPTION in
 
 		# ngx_devel_kit download
 		cd /usr/local/src/nginx/modules || exit 1
-		wget https://github.com/simplresty/ngx_devel_kit/archive/v${NGINX_DEV_KIT}.tar.gz
+		wget https://github.com/simplresty/ngx_devel_kit/archive/refs/tags/v${NGINX_DEV_KIT}.tar.gz
 		tar xaf v${NGINX_DEV_KIT}.tar.gz
 
 		# lua-nginx-module download
 		cd /usr/local/src/nginx/modules || exit 1
-		wget https://github.com/openresty/lua-nginx-module/archive/v${LUA_NGINX_VER}.tar.gz
+  		wget https://github.com/openresty/lua-nginx-module/archive/refs/tags/v${LUA_NGINX_VER}.tar.gz
 		tar xaf v${LUA_NGINX_VER}.tar.gz
 
 		# lua-resty-core download
 		cd /usr/local/src/nginx/modules || exit 1
-		wget https://github.com/openresty/lua-resty-core/archive/v${LUA_RESTYCORE_VER}.tar.gz
+		wget https://github.com/openresty/lua-resty-core/archive/refs/tags/v${LUA_RESTYCORE_VER}.tar.gz
 		tar xaf v${LUA_RESTYCORE_VER}.tar.gz
 		cd lua-resty-core-${LUA_RESTYCORE_VER} || exit 1
 		make install PREFIX=/etc/nginx
 
 		# lua-resty-lrucache download
 		cd /usr/local/src/nginx/modules || exit 1
-		wget https://github.com/openresty/lua-resty-lrucache/archive/v${LUA_RESTYLRUCACHE_VER}.tar.gz
+		wget https://github.com/openresty/lua-resty-lrucache/archive/refs/tags/v${LUA_RESTYLRUCACHE_VER}.tar.gz
 		tar xaf v${LUA_RESTYLRUCACHE_VER}.tar.gz
 		cd lua-resty-lrucache-${LUA_RESTYLRUCACHE_VER} || exit 1
 		make install PREFIX=/etc/nginx
