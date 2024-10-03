@@ -288,7 +288,7 @@ case $OPTION in
 	# More Headers
 	if [[ $HEADERMOD == 'y' ]]; then
 		cd /usr/local/src/nginx/modules || exit 1
-  		wget https://github.com/openresty/headers-more-nginx-module/archive/refs/tags/v${HEADERMOD_VER}.zip
+    		wget https://github.com/openresty/headers-more-nginx-module/archive/refs/tags/v${HEADERMOD_VER}.tar.gz
 		tar xaf v${HEADERMOD_VER}.tar.gz
 	fi
 
@@ -701,7 +701,7 @@ case $OPTION in
 
 		else
 			# Same patch as above but fixed conflicts with the HTTP/3 patch
-			wget https://raw.githubusercontent.com/angristan/nginx-autoinstall/master/patches/nginx_hpack_push_with_http3.patch -O nginx_http2_hpack.patch
+			wget https://raw.githubusercontent.com/shlrkb/nginx-autoinstall/master/patches/nginx_hpack_push_with_http3.patch -O nginx_http2_hpack.patch
 		fi
 		patch -p1 <nginx_http2_hpack.patch
 
@@ -818,7 +818,7 @@ case $OPTION in
 	exit
 	;;
 3) # Update the script
-	wget https://raw.githubusercontent.com/Angristan/nginx-autoinstall/master/nginx-autoinstall.sh -O nginx-autoinstall.sh
+	wget https://raw.githubusercontent.com/shlrkb/nginx-autoinstall/master/nginx-autoinstall.sh -O nginx-autoinstall.sh
 	chmod +x nginx-autoinstall.sh
 	echo ""
 	echo "Update done."
