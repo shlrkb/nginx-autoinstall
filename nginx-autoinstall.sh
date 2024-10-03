@@ -681,7 +681,7 @@ case $OPTION in
 
 		# Apply patch for nginx > 1.19.7 (source: https://github.com/cloudflare/quiche/issues/936#issuecomment-857618081)
 		wget https://raw.githubusercontent.com/shlrkb/nginx-autoinstall/master/patches/nginx-http3-1.19.7.patch -O nginx-http3.patch
-		patch -p01 <nginx-http3.patch
+		#patch -p01 <nginx-http3.patch
 
 		NGINX_OPTIONS=$(
 			echo "$NGINX_OPTIONS"
