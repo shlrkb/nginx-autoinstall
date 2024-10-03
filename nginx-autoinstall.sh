@@ -243,7 +243,7 @@ case $OPTION in
 
 	# Cleanup
 	# The directory should be deleted at the end of the script, but in case it fails
-	rm -r /usr/local/src/nginx/ >>/dev/null 2>&1
+	#rm -r /usr/local/src/nginx/ >>/dev/null 2>&1
 	mkdir -p /usr/local/src/nginx/modules
 
 	# Dependencies
